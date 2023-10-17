@@ -8,12 +8,12 @@
 ?>
 <html>
 <head>
-<title><?php echo $heading; ?></title>
+<title> {{ heading }} </title>
 </head>
 <body>
-<h1><?php echo $heading; ?></h1>
+<h1> {{ heading }} </h1>
 <p>
-    <?php echo $message; ?>
+{{ message }} 
 </p>
 </body>
 </html>

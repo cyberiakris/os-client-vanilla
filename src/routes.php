@@ -9,7 +9,7 @@ use Slim\Views\TwigExtension;
 $container = $app->getContainer();
 
 // Default Instantiate the renderer
-//$container['renderer'] = new PhpRenderer("./templates"); // already declared invsrc/dependencies
+//$container['renderer'] = new PhpRenderer("./templates"); // already declared in src/dependencies
 
 /* twig-view */
 // Register Twig View helper
@@ -39,7 +39,7 @@ $app->get('/[{name:.*}]', function ($request, $response, $args) {
     } elseif ($name === 'testPage') {
 
         $data = array(
-            'heading' => 'About page',
+            'heading' => 'Test page',
             'message' => 'This page is an example of a static route, rendering a PHP file.'
         );
         return $this->renderer->render($response, 'testpage.php', $data);
@@ -51,7 +51,24 @@ $app->get('/[{name:.*}]', function ($request, $response, $args) {
         $nodeName = $urlParts[0];
         if(isset($qs['id'])){ $nodeId = $qs['id']; }
         if(isset($urlParts[2]) && is_numeric($urlParts[2])){ $nodeId = $urlParts[2]; }
-        $out = (($urlParts[1]=='view') && isset($nodeId)) ? getNode($nodeName,$nodeId,$qs) : getNodes($nodeName,$qs);
+
+        if(($urlParts[1]=='view') && isset($nodeId)){
+            $out = getNode($nodeName,$nodeId,$qs);
+            if(isset($out['data'][0])){ $out = $out['data'][0]; }
+        }
+        else if(!empty($urlParts[1]) && !empty($urlParts[2])){
+            $out = getNodeAny($nodeName, $urlParts[1], $urlParts[2] ,$qs);
+        }
+        else if(($urlParts[0]=='pages') && !empty($urlParts[1]) && empty($urlParts[2])){
+            $out = getNodeAny($nodeName, 'tagline', $urlParts[1] ,$qs);
+        }
+        else {
+            $out = getNodes($nodeName,$qs);
+        }
+        
+        if(isset($out['data'])){ $out = $out['data']; }
+        //var_dump($out); exit;
+
         return $this->renderer->render($response, 'apinode.php', $out);
 
     } else {
@@ -102,6 +119,17 @@ function getNode($request, $id, $args)
     $getData = curlGetRequest($url);
     // Return the Node as Array response
     $out = json_decode($getData, true);
+    return $out;
+}
+
+function getNodeAny($request, $node, $tag, $args)
+{
+    $url = getenv('APIURL') . $request . '/' . $node . '/' . $tag . '.json';
+    // Retrieve the Node with the provided ID from the database or data source
+    $getData = curlGetRequest($url);
+    // Return the Node as Array response
+    $out = json_decode($getData, true);
+    //var_dump($out); exit;
     return $out;
 }
 
