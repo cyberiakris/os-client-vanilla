@@ -6,7 +6,17 @@ $container = $app->getContainer();
 // view renderer
 $container['renderer'] = function ($c) {
     $settings = $c->get('settings')['renderer'];
-    return new Slim\Views\PhpRenderer($settings['template_path']);
+    //$view =  new Slim\Views\PhpRenderer($settings['template_path']);
+    $view = new Slim\Views\Twig($settings['template_path'], [
+        'cache' => false, // Disable caching for development
+        'debug' => true, // Enable debugging
+    ]);
+
+    // Define a 'base_url' global variable that's accessible in all templates
+    $view->getEnvironment()->addGlobal('base_url', getenv('BASE_URL'));
+
+    return $view;
+
 };
 
 // monolog

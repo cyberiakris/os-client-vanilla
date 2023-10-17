@@ -3,7 +3,7 @@
 <head>
     <title>My Website</title>
     <!-- Include CSS and JS files -->
-    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="{{ base_url }}/public/css/style.css">
     <!-- script src="./public/js/script.js"></script -->
 </head>
 <body>
@@ -11,9 +11,9 @@
         <header>
             <div class="menu">
                 <ul>
-                    <li><a href="./">Home</a></li>
-                    <li><a href="./about">About</a></li>
-                    <li><a href="./pages/contact">Contact</a></li>
+                    <li><a href="{{ base_url }}/">Home</a></li>
+                    <li><a href="{{ base_url }}/about">About</a></li>
+                    <li><a href="{{ base_url }}/pages/contact">Contact</a></li>
                 </ul>
             </div>
 
