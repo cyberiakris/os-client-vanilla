@@ -1,0 +1,77 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.banner-area{
+    background-image: url('../img/photo-home.jpg');
+    background-position: center center;
+    background-size:cover ;
+    /* -webkit-background-size:cover ; */
+    height: 100vh;
+    width: auto;
+    margin: auto;
+}
+.menu{
+    float: right;
+    list-style: none;
+    margin-top:30px;
+}
+.menu ul li{
+    display: inline-block;
+}
+.menu ul li a{
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-family: 'poppins' ,sans-serif;
+    font-size: 16px;
+}
+.menu ul li a:hover{
+    color: rgb(199, 139, 255);
+}
+/* .logo{
+    height: 20%;
+    float: left;
+    color: azure;
+    list-style: none;
+    
+} */
+.banner-text{
+    position: absolute;
+    max-width: 600px;
+    min-height: 300px;
+    margin: 15% 20%;
+    text-align: center;
+}
+.banner-text h1{
+    text-align: center;
+    color:rgb(233, 185, 255);
+    text-transform: uppercase;
+    font-size: 60px;
+    font-family: 'poppins' , sans-serif;
+}
+.banner-text p{
+    color: #fff;
+    font-size: 18px;
+}
+.banner-text a{
+    border: 1px solid #fff;
+    padding: 10px 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-top: 20px;
+    display: inline-block;
+    color: #fff;
+}
+.banner-text a:hover{
+    background-color: white;
+    color: rgba(68, 25, 109, 0.623);
+    font-weight: bold;
+}
+footer {
+    position:absolute;
+    bottom:0;
+    padding: 10px;
+}
